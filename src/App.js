@@ -43,6 +43,7 @@ function App() {
         employee
       }
     });
+    setShowModal(false);
   };
 
   const updateEmployee = (updatedEmployee) => {
@@ -80,6 +81,7 @@ function App() {
             showModal={showModal}
             dismissHandler={() => setShowModal(false)}
             title={'Add Employee'}
+            actionHandler={addEmployee}
             />
           <Table columns={columns} />
         </header>

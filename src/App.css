@@ -87,8 +87,7 @@ td {
 }
 
 .modal {
-  display: grid;
-  text-align: center;
+  display: table-caption;
 }
 
 .modal-input {
