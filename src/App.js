@@ -1,7 +1,10 @@
 import './App.css';
-import React from "react";
+import React, { useReducer, createContext } from 'react';
 import employeeData from './employeeData'
 import Table from './Table'
+import employeeReducer from './EmployeeReducer'
+
+const initialState = {employees: employeeData.employees};
   
 const columns = [
   {
@@ -22,18 +25,63 @@ const columns = [
   }
 ];
 
+const Context = createContext({
+  ...initialState,
+  addEmployee: () => { },
+  updateEmployee: () => { },
+  deleteEmployeeByID: () => { }
+});
+
 function App() {
+  const [state, dispatch] = useReducer(employeeReducer, initialState);
+
+  const addEmployee = (employee) => {
+    dispatch({ type: 'ADD',
+      payload: {
+        employee
+      }
+    });
+  };
+
+  const updateEmployee = (updatedEmployee) => {
+    dispatch({ type: 'UPDATE',
+      payload: {
+        updatedEmployee
+      }
+    });
+  };
+
+  const deleteEmployeeByID = (employeeID) => {
+    dispatch({ type: 'DELETE',
+      payload: {
+        employeeID
+      }
+    });
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <div className="header-container">
-          <h1>Employees</h1>
-          <button className="header-button" >Add +</button>
-        </div>
-        <Table columns={columns} data={employeeData.employees} />
-      </header>
-    </div>
+    <Context.Provider
+      value={{
+        ...state,
+        addEmployee,
+        updateEmployee,
+        deleteEmployeeByID
+      }}
+    >
+      <div className="App">
+        <header className="App-header">
+          <div className="header-container">
+            <h1>Employees</h1>
+            <button className="header-button" onClick={() => addEmployee()}>Add +</button>
+          </div>
+          <Table columns={columns} />
+        </header>
+      </div>
+    </Context.Provider>
   );
 }
 
-export default App;
+export {
+  App,
+  Context
+}

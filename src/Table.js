@@ -1,8 +1,12 @@
 import './App.css';
-import React from "react";
+import React, { useContext } from "react";
 import { useTable } from "react-table";
-  
-function Table({ columns, data }) {
+import { Context } from './App'
+
+const useAPI = () => useContext(Context);
+
+function Table({ columns }) {
+  const { employees, deleteEmployeeByID } = useAPI();
   const {
     getTableProps,
     getTableBodyProps,
@@ -11,7 +15,7 @@ function Table({ columns, data }) {
     prepareRow,
   } = useTable({
     columns,
-    data,
+    data: employees
   })
 
   return (
@@ -35,7 +39,7 @@ function Table({ columns, data }) {
               })}
               <td className="buttons-container">
                 <button className="update-button">Update</button>
-                <button className="delete-button">Delete</button>
+                <button className="delete-button" onClick={() => deleteEmployeeByID(row.values.id)}>Delete</button>
               </td>
             </tr>
           )
