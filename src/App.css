@@ -85,3 +85,12 @@ td {
 .buttons-container {
   display: grid;
 }
+
+.modal {
+  display: grid;
+  text-align: center;
+}
+
+.modal-input {
+  margin-bottom: 10px;
+}

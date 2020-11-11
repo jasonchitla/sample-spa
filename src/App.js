@@ -1,8 +1,9 @@
 import './App.css';
-import React, { useReducer, createContext } from 'react';
+import React, { useReducer, createContext, useState } from 'react';
 import employeeData from './employeeData'
 import Table from './Table'
 import employeeReducer from './EmployeeReducer'
+import EditModal from './EditModal';
 
 const initialState = {employees: employeeData.employees};
   
@@ -33,6 +34,7 @@ const Context = createContext({
 });
 
 function App() {
+  const [showModal, setShowModal] = useState(false);
   const [state, dispatch] = useReducer(employeeReducer, initialState);
 
   const addEmployee = (employee) => {
@@ -72,8 +74,13 @@ function App() {
         <header className="App-header">
           <div className="header-container">
             <h1>Employees</h1>
-            <button className="header-button" onClick={() => addEmployee()}>Add +</button>
+            <button className="header-button" onClick={() => setShowModal(true)}>Add +</button>
           </div>
+          <EditModal
+            showModal={showModal}
+            dismissHandler={() => setShowModal(false)}
+            title={'Add Employee'}
+            />
           <Table columns={columns} />
         </header>
       </div>
