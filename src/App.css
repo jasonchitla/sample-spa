@@ -36,3 +36,52 @@
     transform: rotate(360deg);
   }
 }
+
+table {
+  background-color: grey;
+  width: -webkit-fill-available;
+  border: 4px solid white;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+tr {
+  border: 4px solid white;
+}
+
+th,
+td {
+  margin: 0;
+  padding: 0.5rem;
+  border-bottom: 1px solid white;
+  border-right: 1px solid white;
+  border-top: 1px solid white;
+}
+
+.header-container {
+  display: flex;
+  float: left;
+}
+
+.header-button {
+  height:30px;
+  align-self: center;
+  margin-left: 40px;
+  background-color: greenyellow;
+}
+
+.delete-button {
+  height:30px;
+  align-self: center;
+  background-color: red;
+  color: white;
+}
+
+.update-button {
+  height:30px;
+  align-self: center;
+}
+
+.buttons-container {
+  display: grid;
+}
