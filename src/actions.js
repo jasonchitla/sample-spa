@@ -10,7 +10,9 @@ function updateAction(state, id, updatedEmployee) {
 function deleteAction(state, id) {
   const newEmployeesArray = lodashClonedeep(state.employees);
   const indexToRemove = newEmployeesArray.findIndex(employee => employee.id === id);
-  newEmployeesArray.splice(indexToRemove, 1);
+  if (indexToRemove >= 0) {
+    newEmployeesArray.splice(indexToRemove, 1);
+  }
   return newEmployeesArray;
 }
 

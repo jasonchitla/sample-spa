@@ -1,6 +1,33 @@
 import employeeData from './employeeData'
 import { addAction, deleteAction, updateAction } from './actions'
 
+const employeeListAfterRemovingNonexistentEmployee = [
+  {
+    id: 213354,
+    firstName: 'Jason',
+    lastName: 'Chitla',
+    email: 'jasonchitla@hotmail.com'
+  },
+  {
+    id: 504159,
+    firstName: 'Venkatesh',
+    lastName: 'Yerramsetty',
+    email: 'vyerramsetty@fidelity.com'
+  },
+  {
+    id: 631450,
+    firstName: 'Sancho',
+    lastName: 'Sebastine',
+    email: 'ssebastine@fidelity.com'
+  },
+  {
+    id: 557929,
+    firstName: 'Subin',
+    lastName: 'John',
+    email: 'sjohn@fidelity.com'
+  }
+];
+
 const employeeListAfterRemovingJason = [
   {
     id: 504159,
@@ -89,6 +116,12 @@ describe('employee actions', () => {
       const newListOfEmployees = deleteAction(employeeData, idToDelete)
       expect(newListOfEmployees).toEqual(employeeListAfterRemovingJason);
     });
+
+  it('delete nonexistent employee', () => {
+    const idToDelete = 0;
+    const newListOfEmployees = deleteAction(employeeData, idToDelete)
+    expect(newListOfEmployees).toEqual(employeeListAfterRemovingNonexistentEmployee);
+  });
   
   it('add employee John', () => {
     const newEmployee = {
