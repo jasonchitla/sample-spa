@@ -1,6 +1,6 @@
 # To run locally
 
-npm install
+npm install</br>
 npm start
 
 # To test
