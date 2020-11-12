@@ -1,6 +1,7 @@
 import './App.css';
 import React, { useEffect, useReducer } from 'react';
 import ReactModal from 'react-modal'
+import employeeData from './employeeData'
 
 ReactModal.setAppElement('#root');
 
@@ -58,6 +59,19 @@ function EditModal({ showModal, dismissHandler, title, actionHandler, employee }
     });
   }, [employee])
 
+  const clearFields = () => {
+    dispatch({ type: 'init',
+      payload: {
+        data: employeeData.emptyEmployee
+      }
+    });
+  }
+
+  const onCloseHandler = () => {
+    clearFields();
+    dismissHandler();
+  }
+
   return (
     <div>
       <ReactModal isOpen={showModal} style={customStyles}>
@@ -65,7 +79,8 @@ function EditModal({ showModal, dismissHandler, title, actionHandler, employee }
           <h3 style={{textAlign: 'center'}}>{title}</h3>
           <form className="modal" onSubmit={(e) => {
               e.preventDefault();
-              actionHandler(state)
+              actionHandler(state);
+              clearFields();
             }}>
             <label>
               ID:
@@ -85,7 +100,7 @@ function EditModal({ showModal, dismissHandler, title, actionHandler, employee }
             </label>
             <input type="submit" value="Submit"/>
           </form>
-          <button onClick={() => dismissHandler()}>Close</button>
+          <button onClick={() => onCloseHandler()}>Close</button>
         </div>
       </ReactModal>
     </div>
