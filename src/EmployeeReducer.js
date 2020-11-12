@@ -3,9 +3,9 @@ import lodashClonedeep from 'lodash.clonedeep';
 function reducer(state, action) {
   switch (action.type) {
     case 'UPDATE':
-      const { updatedEmployee } = action.payload;
+      const { id, updatedEmployee } = action.payload;
       const newEmployeesArray1 = lodashClonedeep(state.employees);
-      const indexToUpdate = newEmployeesArray1.findIndex(employee => employee.id === updatedEmployee.id);
+      const indexToUpdate = newEmployeesArray1.findIndex(employee => employee.id === id);
       newEmployeesArray1.splice(indexToUpdate, 1, updatedEmployee);
       return {employees: newEmployeesArray1};
     case 'DELETE':

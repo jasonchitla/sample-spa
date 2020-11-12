@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useReducer } from 'react';
+import React, { useEffect, useReducer } from 'react';
 import ReactModal from 'react-modal'
 
 ReactModal.setAppElement('#root');
@@ -15,20 +15,6 @@ const customStyles = {
   }
 };
 
-function init(employee) {
-  if (!employee) {
-    return {id: '',
-            firstName: '',
-            lastName: '',
-            email: ''};
-  }
-
-  return {id: employee.id ?? '',
-          firstName: employee.firstName ?? '',
-          lastName: employee.lastName ?? '',
-          email: employee.email ?? ''};
-}
-
 function reducer(state, action) {
   switch (action.type) {
     case 'firstName':
@@ -39,6 +25,8 @@ function reducer(state, action) {
       return {...state, id: action.payload.data};
     case 'email':
       return {...state, email: action.payload.data};
+    case 'init':
+      return action.payload.data;
     default:
       throw new Error();
   }
@@ -55,8 +43,20 @@ function handleInputChange(dispatch, event) {
   });
 }
 
+function initEmployee(employee) {
+  return employee;
+}
+
 function EditModal({ showModal, dismissHandler, title, actionHandler, employee }) {
-  const [state, dispatch] = useReducer(reducer, employee, init);
+  const [state, dispatch] = useReducer(reducer, employee, initEmployee);
+
+  useEffect(() => {
+    dispatch({ type: 'init',
+      payload: {
+        data: employee
+      }
+    });
+  }, [employee])
 
   return (
     <div>

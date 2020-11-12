@@ -24,5 +24,11 @@ module.exports = {
             lastName: 'John',
             email: 'sjohn@fidelity.com'
         }
-    ]
+    ],
+    emptyEmployee: {
+        id: '',
+        firstName: '',
+        lastName: '',
+        email: ''
+    }
 };

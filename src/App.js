@@ -46,9 +46,10 @@ function App() {
     setShowModal(false);
   };
 
-  const updateEmployee = (updatedEmployee) => {
+  const updateEmployee = (id, updatedEmployee) => {
     dispatch({ type: 'UPDATE',
       payload: {
+        id,
         updatedEmployee
       }
     });
@@ -82,6 +83,7 @@ function App() {
             dismissHandler={() => setShowModal(false)}
             title={'Add Employee'}
             actionHandler={addEmployee}
+            employee={employeeData.emptyEmployee}
             />
           <Table columns={columns} />
         </header>
